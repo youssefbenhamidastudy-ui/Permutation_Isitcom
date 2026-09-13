@@ -303,13 +303,13 @@ export default function AddRequestForm({ onSubmit, onCancel }) {
                     {tp}
                   </option>
                 ))}
-                <option value="ANY">Peu importe le groupe</option>
+                <option value="ANY">Sans préférence</option>
               </select>
             </div>
           </div>
           {to.section && to.year && to.td && to.tp && (
             <p className="code-preview">
-              Code : {to.tp === 'ANY' ? `${to.year}${to.section}${to.td} (groupe indifférent)` : buildClassCode(to)}
+              Code : {to.tp === 'ANY' ? `${to.year}${to.section}${to.td} (sans préférence)` : buildClassCode(to)}
             </p>
           )}
           <p className="field-hint">
