@@ -1153,4 +1153,13 @@ textarea#drawer-message:focus {
     width: 100%;
     padding: 10px;
   }
+  
+  .request-swap {
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .swap-icon {
+    transform: rotate(90deg);
+  }
 }
