@@ -731,30 +731,29 @@ body {
   position: fixed;
   right: 24px;
   bottom: 24px;
-  background: rgba(10, 37, 64, 0.85);
-  backdrop-filter: blur(12px);
-  color: var(--paper);
-  border: 1px solid rgba(88, 182, 231, 0.4);
+  background: var(--accent);
+  color: var(--navy-deep);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 14px 24px;
-  box-shadow: 0 4px 20px rgba(0, 128, 199, 0.4);
+  box-shadow: 0 4px 20px rgba(247, 148, 24, 0.4);
   cursor: pointer;
   transition: var(--transition);
   z-index: 40;
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
 }
 
 .floating-edit-btn:hover {
-  background: var(--primary);
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 6px 25px rgba(0, 128, 199, 0.6);
+  background: var(--accent-dark);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 6px 25px rgba(247, 148, 24, 0.6);
   transform: translateY(-3px);
-  color: white;
+  color: var(--navy-deep);
 }
 
 /* Drawer Overlay & Panel */
