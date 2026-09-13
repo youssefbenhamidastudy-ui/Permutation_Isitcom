@@ -1,0 +1,96 @@
+.animated-bg-stage {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(ellipse at 70% 30%, #0e3358 0%, #0a2540 45%, #040d18 100%);
+  z-index: -1;
+  overflow: hidden;
+}
+
+canvas#animated-bg-net {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.animated-bg-glow {
+  position: absolute;
+  top: 50%;
+  left: 68%;
+  width: 46vmax;
+  height: 46vmax;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(88,182,231,0.22) 0%, rgba(88,182,231,0) 70%);
+  pointer-events: none;
+  animation: bgGlowPulse 6s ease-in-out infinite;
+}
+
+@keyframes bgGlowPulse {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+}
+
+.animated-bg-logo-wrap {
+  position: absolute;
+  top: 50%;
+  left: 68%;
+  width: 38vmin;
+  min-width: 260px;
+  max-width: 520px;
+  transform: translate(-50%, -50%);
+  will-change: transform;
+  filter: drop-shadow(0 0 40px rgba(88,182,231,0.35));
+}
+
+.animated-bg-logo-wrap svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.animated-bg-ping {
+  fill: none;
+  stroke: #58B6E7;
+  stroke-width: 1.4;
+  opacity: 0;
+  transform-box: view-box;
+  transform-origin: 281px 70px;
+  animation: bgPing 4.5s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+
+.animated-bg-ping.p2 { animation-delay: 1.5s; stroke: #F79418; }
+.animated-bg-ping.p3 { animation-delay: 3s; }
+
+@keyframes bgPing {
+  0% { r: 20px; opacity: 0.55; }
+  70% { r: 90px; opacity: 0; }
+  100% { r: 90px; opacity: 0; }
+}
+
+.animated-bg-rays {
+  transform-box: view-box;
+  transform-origin: 281px 70px;
+  animation: bgSpin 40s linear infinite;
+}
+
+@keyframes bgSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animated-bg-vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(4,13,24,0.88) 0%, rgba(4,13,24,0.55) 38%, rgba(4,13,24,0.1) 62%);
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-bg-glow, .animated-bg-ping, .animated-bg-rays {
+    animation: none !important;
+  }
+}

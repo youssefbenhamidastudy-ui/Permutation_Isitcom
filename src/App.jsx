@@ -5,6 +5,8 @@ import Filters from './components/Filters.jsx';
 import RequestList from './components/RequestList.jsx';
 import Modal from './components/Modal.jsx';
 import AddRequestForm from './components/AddRequestForm.jsx';
+import ModificationDrawer from './components/ModificationDrawer.jsx';
+import AnimatedBackground from './components/AnimatedBackground.jsx';
 import { fetchPermutations, insertPermutation } from './services/permutations.js';
 import { matchesSearch } from './utils/search.js';
 import { matchesFilters, DEFAULT_FILTERS } from './utils/filters.js';
@@ -16,6 +18,7 @@ export default function App() {
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
   const [showForm, setShowForm] = useState(false);
+  const [showDrawer, setShowDrawer] = useState(false);
 
   const loadRequests = useCallback(() => {
     setLoading(true);
@@ -46,43 +49,63 @@ export default function App() {
   }, [requests, searchTerm, filters]);
 
   return (
-    <div className="page">
-      <Header onAddClick={() => setShowForm(true)} />
+    <>
+      <AnimatedBackground />
+      <div className="page">
+        <Header onAddClick={() => setShowForm(true)} />
 
-      <div className="toolbar">
-        <SearchBar value={searchTerm} onChange={setSearchTerm} />
-        <Filters filters={filters} onChange={setFilters} />
-      </div>
+        <div className="toolbar">
+          <SearchBar value={searchTerm} onChange={setSearchTerm} />
+          <Filters filters={filters} onChange={setFilters} />
+        </div>
 
-      <section>
-        <h2 className="section-title">
-          Demandes récentes{' '}
-          <span className="count-badge" aria-live="polite">{visibleRequests.length}</span>
-        </h2>
-        {loading ? (
-          <div className="empty-state">
-            <p>Chargement des demandes…</p>
-          </div>
-        ) : loadError ? (
-          <div className="empty-state">
-            <p>Impossible de charger les demandes. Vérifiez votre connexion.</p>
-            <button className="btn btn-primary" style={{ marginTop: 16 }} onClick={loadRequests}>
-              Réessayer
-            </button>
-          </div>
-        ) : (
-          <RequestList requests={visibleRequests} />
+        <section>
+          <h2 className="section-title">
+            Demandes récentes{' '}
+            <span className="count-badge" aria-live="polite">{visibleRequests.length}</span>
+          </h2>
+          {loading ? (
+            <div className="empty-state">
+              <p>Chargement des demandes…</p>
+            </div>
+          ) : loadError ? (
+            <div className="empty-state">
+              <p>Impossible de charger les demandes. Vérifiez votre connexion.</p>
+              <button className="btn btn-primary" style={{ marginTop: 16 }} onClick={loadRequests}>
+                Réessayer
+              </button>
+            </div>
+          ) : (
+            <RequestList requests={visibleRequests} />
+          )}
+        </section>
+
+        {showForm && (
+          <Modal title="Ajouter une permutation" onClose={() => setShowForm(false)}>
+            <AddRequestForm
+              onSubmit={handleAddRequest}
+              onCancel={() => setShowForm(false)}
+            />
+          </Modal>
         )}
-      </section>
 
-      {showForm && (
-        <Modal title="Ajouter une permutation" onClose={() => setShowForm(false)}>
-          <AddRequestForm
-            onSubmit={handleAddRequest}
-            onCancel={() => setShowForm(false)}
-          />
-        </Modal>
-      )}
-    </div>
+        {/* Bouton flottant pour modifier/supprimer */}
+        <button 
+          className="floating-edit-btn" 
+          onClick={() => setShowDrawer(true)}
+          aria-label="Modifier ou supprimer une demande"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span className="floating-edit-text">Modifier ou supprimer une demande</span>
+        </button>
+
+        {/* Drawer pour la modification/suppression */}
+        <ModificationDrawer 
+          isOpen={showDrawer} 
+          onClose={() => setShowDrawer(false)} 
+          requests={requests}
+        />
+      </div>
+    </>
   );
 }
