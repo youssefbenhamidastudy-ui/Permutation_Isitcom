@@ -731,15 +731,15 @@ body {
   position: fixed;
   right: 24px;
   bottom: 24px;
-  background: var(--accent);
-  color: var(--navy-deep);
+  background: #C83B3B; /* Rouge élégant et harmonique */
+  color: var(--paper); /* Texte blanc/cassé pour un contraste parfait */
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 999px;
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 14px 24px;
-  box-shadow: 0 4px 20px rgba(247, 148, 24, 0.4);
+  box-shadow: 0 4px 20px rgba(200, 59, 59, 0.45);
   cursor: pointer;
   transition: var(--transition);
   z-index: 40;
@@ -749,11 +749,11 @@ body {
 }
 
 .floating-edit-btn:hover {
-  background: var(--accent-dark);
+  background: #A93232; /* Rouge plus profond au survol */
   border-color: rgba(255, 255, 255, 0.4);
-  box-shadow: 0 6px 25px rgba(247, 148, 24, 0.6);
+  box-shadow: 0 6px 25px rgba(200, 59, 59, 0.65);
   transform: translateY(-3px);
-  color: var(--navy-deep);
+  color: #ffffff;
 }
 
 /* Drawer Overlay & Panel */
